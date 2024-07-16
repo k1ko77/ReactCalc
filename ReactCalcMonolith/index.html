@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using React.js"
+    />
+
+    <link rel="manifest" href="manifest.json" />
+	
+	<script src="react.development.js"></script>
+	<script src="react-dom.development.js"></script>
+
+	<script src="babel.min.js"></script>
+	
+	<link href="index.css" rel="stylesheet">
+
+    <title>Калькулятор React</title>
+  </head>
+  
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+	
+	<script type="text/babel">
+	
+		class Display extends React.Component
+		{
+			constructor(props)
+			{
+				super(props);
+				this.state = {
+								calc: 0,
+								result: 0
+							 };
+			}
+			
+			render(){
+				return (
+					<div className="display">
+						{this.state.result ? <span>({this.stat.result})</span> : '' } { this.state.calc || "0"}
+					</div>
+				);
+			}
+		}
+	
+		class Digits extends React.Component
+		{
+			constructor(props)
+			{
+				super(props);
+				
+				this.state = { digits: []};
+			}
+			
+			//функция для создания цифр от 1 до 10
+			createDigits() 
+			{
+				for (let i = 1; i < 10; i++)
+				{
+					this.state.digits.push(i);
+				}
+			}
+			
+			addToDigits() 
+			{
+				this.state.digits.push('.');
+				this.state.digits.push('0');
+				this.state.digits.push('=');
+			}
+			
+			eachDig(item, i)
+			{
+				return (
+					<button key={i} index={i}>
+						{item}
+					</button>
+				);
+			}
+
+			render()
+			{
+				this.createDigits();
+				this.addToDigits();
+				return (
+					<div className="digits">
+						{ this.state.digits.map((item, i) => this.eachDig(item, i)) }
+					</div>
+				)
+			}
+		}			
+	
+		class Opers extends React.Component
+		{
+			constructor(props)
+			{
+				super(props);
+				
+				this.state = { ops: ['/', '*', '+', '-', 'DEL', 'C']};
+			}
+			
+			/*
+			updateCalc(item, i){
+				// Заперетили использовать операторы 
+				// больше одного раза и вводить ранше чисел
+				if (this.state.ops.includes(item) && calc === '' ||
+					this.state.ops.includes(item) && this.state.ops.includes(calc.slice(-1))) 
+				{
+					return;
+				}
+
+				setCalc(calc + item);
+
+				if (!this.state.ops.includes(item)) 
+				{
+					setResult(eval(calc + item).toString());
+				}
+			}
+			*/
+			
+			/*
+			//Для Удаления части
+			deleteLast()
+			{
+				if (calc == '') 
+				{
+					return;
+				}
+
+				const value = calc.slice(0, -1);
+
+				setCalc(value);
+			}
+			*/
+			
+			/*
+			// Для удаления всего
+			deleteAll()
+			{
+				setResult('');
+				setCalc('');
+			}
+			*/
+			
+			/*
+			// Для =
+			const calculate()
+			{
+				setCalc(eval(calc).toString());
+			}
+			*/
+			
+			eachOp(item, i){
+				return (
+					<button key={i} index={i}>
+						{item}
+					</button>);
+			}
+			
+			render(){
+				return (
+					<div className="operators">
+						{ this.state.ops.map((item, i) => this.eachOp(item, i)) }
+					</div>					
+					);
+			}
+		}
+
+		/*
+		return (
+			<div className="App">
+				<div className="calculator">
+	
+					//Создаём кнопки простейших математических операций
+					<div className="operators">
+						<button onClick={() => updateCalc('/')}>/</button>
+						<button onClick={() => updateCalc('*')}>*</button>
+						<button onClick={() => updateCalc('+')}>+</button>
+						<button onClick={() => updateCalc('-')}>-</button>
+		  
+						<button onClick={deleteLast}>DEL</button>
+					</div>
+			
+					//Создаём кнопки 0, точку и равно, а так же испоьзуем функцию создания оставшихся цифр
+					<div className="digits">
+						{ createDigits() }
+						<button onClick={() => updateCalc('0')}>0</button>
+						<button onClick={() => updateCalc('.')}>.</button>
+
+						<button onClick={calculate}>=</button>
+					</div>
+
+				</div>
+			</div>
+		);
+		*/
+	
+		const root = ReactDOM.createRoot(document.getElementById('root'));
+		root.render(
+			<div className="App">
+				<div className="calculator">
+					<Display />
+					<Opers />
+					<Digits />
+				</div>
+			</div>);
+	</script>
+	
+  </body>
+</html>
