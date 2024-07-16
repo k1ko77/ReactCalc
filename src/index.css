@@ -37,6 +37,8 @@ body {
 }
 /* Задали размеры и цвета дисплея */
 .display {
+  //display: flex;
+  //position: relative;
   padding: 16px;
   text-align: right;
   background-color: var(--dark);
@@ -46,8 +48,16 @@ body {
 }
 /* Задали размер и цвет числа в скобках */
 .display span {
+  
   font-size: 14px;
   color: #888;
+}
+.display button {
+  flex: 0 1 20%;
+  font-size: 24px;
+  
+  background-color: var(--primary);
+  font-weight: 700;
 }
 /* Задали размер и цвет кнопок, добавили курсор */
 button {
@@ -60,7 +70,7 @@ button {
   cursor: pointer;
   transition: 0.4s;
 }
-/* Сделали кнопки немного светлее */
+/* Сделали кнопки немного светлее при наведении на них*/
 button:hover {
   opacity: 0.9;
 }
@@ -85,3 +95,24 @@ button:hover {
   max-width: 33.333%;
   background-color: var(--dark);
 }
+/* .default {
+  display: flex;
+  position: absolute;
+  overflow: hidden;
+  border-top-left-radius: 16px;
+  //float: left;
+  z-index: 77;
+  //top: 0;
+  //left: 0;
+  width: 53%;
+}
+.default button {
+  flex: 0 0 20%;
+  font-size: 24px;
+  background-color: var(--primary);
+  font-weight: 700;
+} */
+/*.default-div {
+  width: 24px;
+  height: 24px;
+}*/

@@ -44,7 +44,12 @@ function App() {
   const calculate = () => {
     setCalc(eval(calc).toString());
   }
-// Для Удаления
+// Для удаления всего
+  const deleteAll = () =>{
+    setResult('');
+    setCalc('');
+   }
+// Для Удаления части
  const deleteLast = () => {
   if (calc == '') {
     return;
@@ -58,8 +63,16 @@ function App() {
   return (
     <div className="App">
       <div className="calculator">
+        {/* <div className="default">
+          <button onClick={deleteAll}>C</button>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+         </div> */}
         <div className="display">
           {result ? <span>({result})</span> : '' } { calc || "0"}
+          <button onClick={deleteAll}>C</button>
         </div>
         {/* Создаём кнопки простейших математических операций */}
         <div className="operators">
