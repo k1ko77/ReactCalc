@@ -70,7 +70,7 @@ function App() {
          </div> */}
         <div className="display">
           {result ? <span>({result})</span> : '' } { calc || "0"}
-          <button onClick={deleteAll}>C</button>
+          {/* <button onClick={deleteAll}>C</button> */}
         </div>
         {/* Создаём кнопки простейших математических операций */}
         <div className="operators">
@@ -80,6 +80,7 @@ function App() {
           <button onClick={() => updateCalc('-')}>-</button>
           
           <button onClick={deleteLast}>DEL</button>
+          <button onClick={deleteAll}>C</button>
         </div>
         {/* Создаём кнопки 0, точку и равно, а так же испоьзуем функцию создания оставшихся цифр  */}
         <div className="digits">

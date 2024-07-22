@@ -57,7 +57,7 @@
 				this.state = { digits: []};
 			}
 			
-			//функция для создания цифр от 1 до 10
+			//функция для создания цифр от 1 до 9
 			createDigits() 
 			{
 				for (let i = 1; i < 10; i++)
@@ -68,8 +68,8 @@
 			
 			addToDigits() 
 			{
-				this.state.digits.push('.');
 				this.state.digits.push('0');
+				this.state.digits.push('.');
 				this.state.digits.push('=');
 			}
 			
@@ -105,8 +105,8 @@
 			
 			/*
 			updateCalc(item, i){
-				// Заперетили использовать операторы 
-				// больше одного раза и вводить ранше чисел
+				// Запретили использовать операторы 
+				// больше одного раза и вводить раньше чисел
 				if (this.state.ops.includes(item) && calc === '' ||
 					this.state.ops.includes(item) && this.state.ops.includes(calc.slice(-1))) 
 				{

@@ -52,13 +52,13 @@ body {
   font-size: 14px;
   color: #888;
 }
-.display button {
+/* .display button {
   flex: 0 1 20%;
   font-size: 24px;
   
   background-color: var(--primary);
   font-weight: 700;
-}
+} */
 /* Задали размер и цвет кнопок, добавили курсор */
 button {
   appearance: none;
@@ -91,8 +91,8 @@ button:hover {
 }
 /* Подогнали размер под калькулятор, изменили цвет и жирность */
 .digits button {
-  flex: 1 1 33.333%;
-  max-width: 33.333%;
+  flex: 1 1 25%;
+  max-width: 25%;
   background-color: var(--dark);
 }
 /* .default {
