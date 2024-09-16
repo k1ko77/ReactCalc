@@ -7,14 +7,11 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using React.js"
+      content="Создано на основе React.js"
     />
-
-    <link rel="manifest" href="manifest.json" />
 	
 	<script src="react.development.js"></script>
 	<script src="react-dom.development.js"></script>
-
 	<script src="babel.min.js"></script>
 	
 	<link href="index.css" rel="stylesheet">
@@ -23,190 +20,127 @@
   </head>
   
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>Необходимо активировать JavaScript для запуска калькулятора</noscript>
     <div id="root"></div>
 	
 	<script type="text/babel">
-	
-		class Display extends React.Component
+
+		class Calculator extends React.Component
 		{
 			constructor(props)
 			{
 				super(props);
+
 				this.state = {
-								calc: 0,
-								result: 0
+								calc: '',
+								result: '',
+								digits: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.', '='],
+								ops: ['/', '*', '+', '-', 'DEL', 'C'],
+								flgLoaded: false
 							 };
 			}
 			
-			render(){
-				return (
-					<div className="display">
-						{this.state.result ? <span>({this.stat.result})</span> : '' } { this.state.calc || "0"}
-					</div>
-				);
-			}
-		}
-	
-		class Digits extends React.Component
-		{
-			constructor(props)
+			updateCalc(e)
 			{
-				super(props);
+				let item = e.target.innerText;
+				let val = '';
+				let res = 0;
 				
-				this.state = { digits: []};
-			}
-			
-			//функция для создания цифр от 1 до 9
-			createDigits() 
-			{
-				for (let i = 1; i < 10; i++)
+				switch (item)
 				{
-					this.state.digits.push(i);
+					case 'C':
+						this.setState({calc: '', result: ''});
+						break;
+					case 'DEL':
+						if (this.state.calc == '') 
+						{
+							return;
+						}
+
+						val = this.state.calc.slice(0, -1);
+
+						this.setState({calc: val});
+						
+						if (val.length > 0)
+						{
+							if (!this.state.ops.includes(val.slice(-1))) 
+							{
+								res = eval(val);
+								this.setState({result: res.toString()});
+							}
+						}
+						else
+						{
+							this.setState({result: ''});
+						}
+						
+						break;
+					case '=':
+						val = this.state.result;
+						this.setState({calc: val, result: ''});
+						break;
+					default:
+						// Заперетили использовать операторы 
+						// больше одного раза и вводить ранше чисел
+						if (this.state.ops.includes(item) && this.state.calc === '' ||
+							this.state.ops.includes(item) && 
+							this.state.ops.includes(this.state.calc.slice(-1))) 
+						{
+							return;
+						}
+						
+						val = this.state.calc + item;
+						this.setState({calc: val});
+
+						if (!this.state.ops.includes(item)) 
+						{
+							res = eval(val);
+							this.setState({result: res.toString()});
+						}			
+						break;
 				}
 			}
-			
-			addToDigits() 
+					
+			eachOp(item, i)
 			{
-				this.state.digits.push('0');
-				this.state.digits.push('.');
-				this.state.digits.push('=');
+				return (
+					<button key={i} index={i} onClick={(e) => this.updateCalc(e)}>
+						{item}
+					</button>
+				)
 			}
 			
 			eachDig(item, i)
 			{
 				return (
-					<button key={i} index={i}>
+					<button key={i} index={i} onClick={(e) => this.updateCalc(e)}>
 						{item}
 					</button>
 				);
 			}
-
+		
 			render()
-			{
-				this.createDigits();
-				this.addToDigits();
+			{			
 				return (
-					<div className="digits">
-						{ this.state.digits.map((item, i) => this.eachDig(item, i)) }
-					</div>
+					<div className="calculator">
+						<div className="display">
+							{ this.state.result ? <span>({this.state.result})</span> : '' } { this.state.calc || "0" }
+						</div>
+						<div className="operators">
+							{ this.state.ops.map((item, i) => this.eachOp(item, i)) }
+						</div>							
+						<div className="digits">
+							{ this.state.digits.map((item, i) => this.eachDig(item, i)) }
+						</div>
+					</div>					
 				)
 			}
-		}			
-	
-		class Opers extends React.Component
-		{
-			constructor(props)
-			{
-				super(props);
-				
-				this.state = { ops: ['/', '*', '+', '-', 'DEL', 'C']};
-			}
-			
-			/*
-			updateCalc(item, i){
-				// Запретили использовать операторы 
-				// больше одного раза и вводить раньше чисел
-				if (this.state.ops.includes(item) && calc === '' ||
-					this.state.ops.includes(item) && this.state.ops.includes(calc.slice(-1))) 
-				{
-					return;
-				}
-
-				setCalc(calc + item);
-
-				if (!this.state.ops.includes(item)) 
-				{
-					setResult(eval(calc + item).toString());
-				}
-			}
-			*/
-			
-			/*
-			//Для Удаления части
-			deleteLast()
-			{
-				if (calc == '') 
-				{
-					return;
-				}
-
-				const value = calc.slice(0, -1);
-
-				setCalc(value);
-			}
-			*/
-			
-			/*
-			// Для удаления всего
-			deleteAll()
-			{
-				setResult('');
-				setCalc('');
-			}
-			*/
-			
-			/*
-			// Для =
-			const calculate()
-			{
-				setCalc(eval(calc).toString());
-			}
-			*/
-			
-			eachOp(item, i){
-				return (
-					<button key={i} index={i}>
-						{item}
-					</button>);
-			}
-			
-			render(){
-				return (
-					<div className="operators">
-						{ this.state.ops.map((item, i) => this.eachOp(item, i)) }
-					</div>					
-					);
-			}
 		}
-
-		/*
-		return (
-			<div className="App">
-				<div className="calculator">
-	
-					//Создаём кнопки простейших математических операций
-					<div className="operators">
-						<button onClick={() => updateCalc('/')}>/</button>
-						<button onClick={() => updateCalc('*')}>*</button>
-						<button onClick={() => updateCalc('+')}>+</button>
-						<button onClick={() => updateCalc('-')}>-</button>
-		  
-						<button onClick={deleteLast}>DEL</button>
-					</div>
-			
-					//Создаём кнопки 0, точку и равно, а так же испоьзуем функцию создания оставшихся цифр
-					<div className="digits">
-						{ createDigits() }
-						<button onClick={() => updateCalc('0')}>0</button>
-						<button onClick={() => updateCalc('.')}>.</button>
-
-						<button onClick={calculate}>=</button>
-					</div>
-
-				</div>
-			</div>
-		);
-		*/
 	
 		const root = ReactDOM.createRoot(document.getElementById('root'));
 		root.render(
 			<div className="App">
-				<div className="calculator">
-					<Display />
-					<Opers />
-					<Digits />
-				</div>
+				<Calculator />
 			</div>);
 	</script>
 	
