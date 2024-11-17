@@ -1,11 +1,11 @@
-/* Задали используемые в будущем цвета */
+/* Настройка цветовых констант */
 :root {
   --primary: #d81e5b;
   --secondary: #8c38ff;
   --dark: #131a26;
   --light: #eee;
 }
-/* Задали размеры для кнопок */
+/* Настройки для всех селекторов */
 * {
   margin: 0;
   padding: 0;
@@ -13,12 +13,12 @@
   font-family: 'Fira Sans', sans-serif;
 }
 
-/* Задали задний фон */
+/* Фон тела документа */
 body {
   background-color: var(--light);
 }
 
-/* Переместили наши кнопки в ценрт экрана */
+/* Смещение компонента App в центр экрана */
 .App {
   display: flex;
   min-height: 100vh;
@@ -26,7 +26,8 @@ body {
   justify-content: center;
   padding: 16px;
 }
-/* Задали размеры и цыет нашего калькулятора */
+
+/* Настройка компонента "калькулятор" */
 .calculator {
   width: 100%;
   max-width: 400px;
@@ -35,7 +36,8 @@ body {
   overflow: hidden;
   box-shadow: 0px 2px 64px rgba(0, 0, 0, 0.2);
 }
-/* Задали размеры и цвета дисплея */
+
+/* Настройка компонента "дисплей" */
 .display {
   //display: flex;
   //position: relative;
@@ -46,20 +48,15 @@ body {
   font-size: 24px;
   font-weight: 300;
 }
-/* Задали размер и цвет числа в скобках */
+
+/* Настройка результата, размещаемого в скобках */
 .display span {
   
   font-size: 14px;
   color: #888;
 }
-/* .display button {
-  flex: 0 1 20%;
-  font-size: 24px;
-  
-  background-color: var(--primary);
-  font-weight: 700;
-} */
-/* Задали размер и цвет кнопок, добавили курсор */
+
+/* Настройка кнопок, добавление курсора */
 button {
   appearance: none;
   border: none;
@@ -70,49 +67,33 @@ button {
   cursor: pointer;
   transition: 0.4s;
 }
-/* Сделали кнопки немного светлее при наведении на них*/
+
+/* Осветление кнопок при наведении */
 button:hover {
   opacity: 0.9;
 }
-/* Можем растягивать теперь кнопки операций */
+
+/* Возможность растяжения кнопок операций */
 .operators {
   display: flex;
 }
-/* Подогнали размер под калькулятор, изменили цвет и жирность */
+
+/* Адаптация под калькулятор кнопок операций */
 .operators button {
   flex: 1 1 0%;
   background-color: var(--primary);
   font-weight: 700;
 }
-/* Можем растягивать кнопки цифр */
+
+/* Возможность растяжения цифровых кнопок */
 .digits {
   display: flex;
   flex-wrap: wrap;
 }
-/* Подогнали размер под калькулятор, изменили цвет и жирность */
+
+/* Адаптация под калькулятор цифровых кнопок */
 .digits button {
   flex: 1 1 25%;
   max-width: 25%;
   background-color: var(--dark);
 }
-/* .default {
-  display: flex;
-  position: absolute;
-  overflow: hidden;
-  border-top-left-radius: 16px;
-  //float: left;
-  z-index: 77;
-  //top: 0;
-  //left: 0;
-  width: 53%;
-}
-.default button {
-  flex: 0 0 20%;
-  font-size: 24px;
-  background-color: var(--primary);
-  font-weight: 700;
-} */
-/*.default-div {
-  width: 24px;
-  height: 24px;
-}*/
